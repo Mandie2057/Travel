@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login & Signup</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-6">
+      <h2>Login</h2>
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="loginEmail">Email address</label>
+          <input type="email" class="form-control" id="loginEmail" required>
+        </div>
+        <div class="form-group">
+          <label for="loginPassword">Password</label>
+          <input type="password" class="form-control" id="loginPassword" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+      </form>
+    </div>
+    <div class="col-md-6">
+      <h2>Signup</h2>
+      <form id="signupForm">
+        <div class="form-group">
+          <label for="signupEmail">Email address</label>
+          <input type="email" class="form-control" id="signupEmail" required>
+        </div>
+        <div class="form-group">
+          <label for="signupPassword">Password</label>
+          <input type="password" class="form-control" id="signupPassword" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Signup</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap JS and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+  // Signup Form
+  document.getElementById('signupForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    var email = document.getElementById('signupEmail').value;
+    var password = document.getElementById('signupPassword').value;
+    var user = {
+      email: email,
+      password: password
+    };
+    localStorage.setItem('user', JSON.stringify(user));
+    alert('Signup successful! You can now login.');
+    document.getElementById('signupForm').reset();
+  });
+
+  // Login Form
+  document.getElementById('loginForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    var email = document.getElementById('loginEmail').value;
+    var password = document.getElementById('loginPassword').value;
+    var savedUser = JSON.parse(localStorage.getItem('user'));
+    if (savedUser && savedUser.email === email && savedUser.password === password) {
+      alert('Login successful!');
+      window.location.href = 'profile.html';
+    } else {
+      alert('Invalid email or password. Please try again.');
+    }
+  });
+</script>
+
+</body>
+</html>

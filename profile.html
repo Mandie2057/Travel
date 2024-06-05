@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Profile</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome CSS for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    .profile-container {
+      background-color: #f9f9f9;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .profile-heading {
+      margin-bottom: 30px;
+    }
+    .edit-profile-btn {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6 profile-container">
+      <h2 class="text-center profile-heading"><i class="fas fa-user"></i> <span id="profileUsername"></span>'s Profile</h2>
+      <form id="profileForm">
+        <div class="form-group">
+          <label for="profileEmail">Email address</label>
+          <input type="email" class="form-control" id="profileEmail" readonly>
+        </div>
+        <button type="button" class="btn btn-primary btn-block edit-profile-btn" onclick="editProfile()">Edit Profile</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap JS and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+  // Load user profile data from localStorage
+  var user = JSON.parse(localStorage.getItem('user'));
+  if (user) {
+    document.getElementById('profileUsername').textContent = user.username;
+    document.getElementById('profileEmail').value = user.email;
+  }
+
+  // Function to enable editing of profile
+  function editProfile() {
+    document.getElementById('profileEmail').readOnly = false;
+    document.getElementById('profileEmail').focus();
+  }
+</script>
+
+</body>
+</html>
